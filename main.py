@@ -10,7 +10,7 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 @app.post("/")
 async def main(request: Request):
     body = await request.json()
-    user_text = body["request"]["original_utterance"]
+    user_text = body.get("request", {}).get("original_utterance", "Привет")
 
     response = requests.post(
         DEEPSEEK_API_URL,
